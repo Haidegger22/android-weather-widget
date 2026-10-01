@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Колонка дня: название, дата, иконка, описание -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:minWidth="86dp"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp">
+
+    <TextView
+        android:id="@+id/tv_d_col_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="#FFFFFF"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/tv_d_col_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="2dp"
+        android:textSize="13sp"
+        android:textColor="#9FB0C8"
+        android:text="" />
+
+    <ImageView
+        android:id="@+id/iv_d_col_icon"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_cloud" />
+
+    <TextView
+        android:id="@+id/tv_d_col_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:maxWidth="82dp"
+        android:textColor="#C7D3E3"
+        android:text="" />
+</LinearLayout>

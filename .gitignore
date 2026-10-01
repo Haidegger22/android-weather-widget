@@ -1,0 +1,11 @@
+# сборка и мусор
+build/
+*.apk
+*.jks
+*.keystore
+__pycache__/
+*.pyc
+
+# картинки-исходники и превью (генерируются скриптами)
+icons/
+icon-preview.png

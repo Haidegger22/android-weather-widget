@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Погода Артёма</string>
+    <string name="widget_name">Погода</string>
+    <string name="loading">загрузка…</string>
+    <string name="day_label">Днём</string>
+    <string name="night_label">Ночь</string>
+    <string name="by_hours">По часам</string>
+    <string name="by_days">По дням</string>
+    <string name="feels">Ощущается</string>
+    <string name="wind">Ветер</string>
+    <string name="humidity">Влажность</string>
+    <string name="updated">Обновлено</string>
+    <string name="no_data">Не удалось получить погоду. Проверьте интернет и обновите.</string>
+    <string name="moscow">Москва</string>
+</resources>

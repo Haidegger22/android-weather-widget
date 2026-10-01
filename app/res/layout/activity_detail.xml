@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Шапка: город, температура, днём/ночью, описание -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="26dp"
+                android:paddingBottom="16dp">
+
+                <TextView
+                    android:id="@+id/tv_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:textColor="#FFFFFF"
+                    android:text="@string/moscow" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="top"
+                    android:paddingTop="2dp">
+
+                    <TextView
+                        android:id="@+id/tv_big_temp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="84sp"
+                        android:textColor="#FFFFFF"
+                        android:fontFamily="sans-serif-thin"
+                        android:includeFontPadding="false"
+                        android:shadowColor="#66000000"
+                        android:shadowRadius="10"
+                        android:shadowDy="2"
+                        android:text="—" />
+
+                    <TextView
+                        android:id="@+id/tv_degree"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="34sp"
+                        android:textColor="#FFFFFF"
+                        android:fontFamily="sans-serif-thin"
+                        android:paddingLeft="2dp"
+                        android:paddingTop="8dp"
+                        android:text="°" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_range"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textColor="#E0FFFFFF"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/tv_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="4dp"
+                    android:textSize="17sp"
+                    android:textColor="#B8C6D9"
+                    android:text="@string/loading" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/btn_menu"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="top|end"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_menu"
+                android:contentDescription="@string/app_name" />
+        </FrameLayout>
+
+        <!-- Почасовка: лента по горизонтали -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/card_bg"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/ll_hours"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp" />
+            </HorizontalScrollView>
+        </LinearLayout>
+
+        <!-- Дни: колонки и график -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/card_bg"
+            android:paddingTop="12dp"
+            android:paddingBottom="6dp">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/ll_days"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+
+            <com.ivanhoe.weather.TempGraphView
+                android:id="@+id/graph"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="14dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:textColor="#9FB0C8"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/tv_updated"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:paddingBottom="22dp"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:textColor="#7A8AA0"
+            android:text="" />
+    </LinearLayout>
+</ScrollView>
