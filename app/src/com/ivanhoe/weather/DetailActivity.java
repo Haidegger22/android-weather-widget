@@ -205,7 +205,7 @@ public class DetailActivity extends Activity {
         LinearLayout box = (LinearLayout) findViewById(R.id.ll_days);
         box.removeAllViews();
         LayoutInflater inf = LayoutInflater.from(this);
-        SimpleDateFormat dateFmt = new SimpleDateFormat("d/MM", Locale.US);
+        SimpleDateFormat dateFmt = new SimpleDateFormat("dd.MM", Locale.US);
         dateFmt.setTimeZone(MSK);
 
         for (Weather.Day d : w.days) {

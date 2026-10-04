@@ -2,18 +2,23 @@ package com.ivanhoe.weather;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
-/** График температур по дням: две линии (дневной максимум и ночной минимум) с подписями. */
+/** График температур по дням: две линии (дневной максимум и ночной минимум), подписи и даты под точками. */
 public class TempGraphView extends View {
+
+    private static final TimeZone MSK = TimeZone.getTimeZone("Europe/Moscow");
 
     private List<Weather.Day> days = new ArrayList<>();
     private final Paint high = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -21,6 +26,7 @@ public class TempGraphView extends View {
     private final Paint dotH = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final Paint dotL = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final Paint label = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint date = new Paint(Paint.ANTI_ALIAS_FLAG);
 
     public TempGraphView(Context c) {
         super(c);
@@ -49,6 +55,11 @@ public class TempGraphView extends View {
         label.setColor(0xFFFFFFFF);
         label.setTextSize(sp(c, 12f));
         label.setTextAlign(Paint.Align.CENTER);
+
+        // подписи дат под точками: 04.10, 05.10 и так далее
+        date.setColor(0xFF9FB2CC);
+        date.setTextSize(sp(c, 11f));
+        date.setTextAlign(Paint.Align.CENTER);
     }
 
     public void setDays(List<Weather.Day> value) {
@@ -73,9 +84,9 @@ public class TempGraphView extends View {
         min -= span * 0.25;
         max += span * 0.25;
 
-        float padX = dp(getContext(), 26f);
-        float padTop = dp(getContext(), 22f);
-        float padBottom = dp(getContext(), 22f);
+        float padX = dp(getContext(), 30f);
+        float padTop = dp(getContext(), 26f);
+        float padBottom = dp(getContext(), 46f);   // внизу оставляем место для дат
         float w = getWidth() - padX * 2;
         float h = getHeight() - padTop - padBottom;
         int n = days.size();
@@ -103,14 +114,31 @@ public class TempGraphView extends View {
         canvas.drawPath(ph, high);
         canvas.drawPath(pl, low);
 
+        // границы: подписи не вылезают за вид и не заезжают на строку с датами
+        float topLimit = dp(getContext(), 14f);
+        float bottomLimit = getHeight() - dp(getContext(), 48f);
+
+        SimpleDateFormat df = new SimpleDateFormat("dd.MM", Locale.getDefault());
+        df.setTimeZone(MSK);
+        float dateY = getHeight() - dp(getContext(), 12f);
+
         for (int i = 0; i < n; i++) {
             canvas.drawCircle(xs[i], yh[i], dp(getContext(), 3f), dotH);
             canvas.drawCircle(xs[i], yl[i], dp(getContext(), 3f), dotL);
 
+            // дневной максимум — всегда выше своей точки
             label.setColor(0xFFFFFFFF);
-            canvas.drawText(fmt(days.get(i).max), xs[i], yh[i] - dp(getContext(), 8f), label);
+            float yTop = Math.max(yh[i] - dp(getContext(), 9f), topLimit);
+            canvas.drawText(fmt(days.get(i).max), xs[i], yTop, label);
+
+            // ночной минимум — всегда ниже своей точки
             label.setColor(0xFFB8C6D9);
-            canvas.drawText(fmt(days.get(i).min), xs[i], yl[i] + dp(getContext(), 16f), label);
+            float yBot = Math.min(yl[i] + dp(getContext(), 17f), bottomLimit);
+            canvas.drawText(fmt(days.get(i).min), xs[i], yBot, label);
+
+            // дата в формате 04.10; сегодняшняя — светлее: сразу видно, где начало оси
+            date.setColor(i == 0 ? 0xFFE8F1FF : 0xFF9FB2CC);
+            canvas.drawText(df.format(new Date(days.get(i).time)), xs[i], dateY, date);
         }
     }
 

@@ -20,7 +20,7 @@ ANDROID_SDK="${ANDROID_SDK:-$HOME/android-sdk}"
 HERE="$(cd "$(dirname "$0")" && pwd)"
 PROJECT="${PROJECT:-$(cd "$HERE/.." && pwd)/app}"
 OUT="${OUT:-$(cd "$HERE/.." && pwd)/build}"
-KS="${KS:-$OUT/keystore.jks}"
+KS="${KS:-$HOME/.android-weather-widget/keystore.jks}"
 KS_PASS="${KS_PASS:-android}"
 APP_NAME="${APP_NAME:-weather-widget}"
 
